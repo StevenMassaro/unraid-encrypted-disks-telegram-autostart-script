@@ -33,3 +33,5 @@ curl https://api.telegram.org/bot"$bot_token"/getUpdates -d offset=$((update_id+
 echo Continuing with system startup.
 csrf=$(grep -oP 'csrf_token="\K[^"]+' /var/local/emhttp/var.ini)
 curl -k --data "startState=STOPPED&file=&csrf_token=$csrf&cmdStart=Start" http://localhost/update.htm
+sleep 30s
+rm -rf /root/keyfile

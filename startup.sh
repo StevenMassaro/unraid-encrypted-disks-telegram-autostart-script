@@ -32,6 +32,6 @@ echo Marking received message as confirmed.
 curl https://api.telegram.org/bot"$bot_token"/getUpdates -d offset=$((update_id+1)) --silent --output /dev/null
 echo Continuing with system startup.
 csrf=$(grep -oP 'csrf_token="\K[^"]+' /var/local/emhttp/var.ini)
-curl -k --data "startState=STOPPED&file=&csrf_token=$csrf&cmdStart=Start" http://localhost/update.htm
+curl -k --data "startState=STOPPED&file=&csrf_token=$csrf&cmdStart=Start" http://localhost:$(grep '^PORT=' /boot/config/ident.cfg | cut -d'"' -f2)/update.htm
 sleep 30s
 rm -rf /root/keyfile
